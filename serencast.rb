@@ -8,15 +8,26 @@ require 'rubygems'
 require 'sinatra'
 require 'sinatra/cross_origin'
 
-require 'getsbdata'
+# require 'getsbdata'
+require 'getjson'
 
 enable :cross_origin
 
-get '/' do
-  getsbdata('masui','test').join("\n")
-  # getsbdata('masui','test')
-  # 'abc'
+#get '/' do
+#  # getsbdata('masui','test').join("\n")
+#  getjson('masui','test')
+#end
+
+get '/:project/:page' do |project,page|
+  @project = project
+  @page = page
+  erb :serencast
 end
+
+get '/:project/:page/json' do |project,page|
+  getjson(project,page)
+end
+
 
 # post '/:name/__write' do |name|
 #   data = params[:data]

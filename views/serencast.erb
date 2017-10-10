@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Serencast</title>
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <script language="JavaScript" src="/javascripts/jquery.js"></script>
+    <script language="JavaScript">
+      //var data;
+      //$(function(){
+      //   data = <%= @json %>;
+      //});
+      var project = '<%= @project %>';
+      var page = '<%= @page %>';
+
+      //
+      // index.htmlをメニューとして画面の左側1/5ぐらいで大きく開く
+      // コンテンツウィンドウはその右に開く
+      //
+      height = screen.availHeight;
+      width = screen.availWidth / 5;
+      if(width > 300) width = 300;
+      param = `top=0,left=0,height=${height},width=${width}`;
+      window.open(`http://${location.host}/menu.html?project=${project}&page=${page}`,"menu",param);
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
+
