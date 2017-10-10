@@ -4,13 +4,18 @@
 $:.unshift File.expand_path 'lib', File.dirname(__FILE__)
 
 require 'rubygems'
+
 require 'sinatra'
 require 'sinatra/cross_origin'
+
+require 'getsbdata'
 
 enable :cross_origin
 
 get '/' do
-  "Sinatra"
+  getsbdata('masui','test').join("\n")
+  # getsbdata('masui','test')
+  # 'abc'
 end
 
 # post '/:name/__write' do |name|

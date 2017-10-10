@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'sinatra'
   
-require 'serencast.rb'
+require './serencast.rb'
 
 run Sinatra::Application
