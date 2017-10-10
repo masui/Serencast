@@ -158,7 +158,7 @@ dispLine = (node,ind,top,color,bold,showloading) ->
   if showloading # ローディングGIFアニメ表示
     #  http://preloaders.net/ で作成したロード中アイコンを利用
     span.append $(' <span>&nbsp;</span>')
-    span.append $('<img src="images/loading.gif" style="height:12pt;">')
+    span.append $('<img src="/images/loading.gif" style="height:12pt;">')
 
   $('#menu').append span
 
