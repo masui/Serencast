@@ -9,6 +9,7 @@ require 'uri'
 require 'json'
 
 require 'getltsv'
+require 'getrss'
 
 def _getjson(project,page)
   uri = URI.parse("https://scrapbox.io/api/pages/#{project}/#{URI.encode(page)}/text")
@@ -60,7 +61,10 @@ def _getjson(project,page)
           title = a[0..a.length-2].join(' ').force_encoding("utf-8")
           url = a[a.length-1]
         end
-        if url =~ /\.ltsv$/ then
+
+        if url =~ /\.rdf$/ || url =~ /(rss|feed)/ then
+          parents[indent]['children'] << getrss(title,url)
+        elsif url =~ /\.ltsv$/ then
           # Get the LTSV data and convert it to an object 
           # e.g. http://video.masuilab.org/gear.ltsv
           ltsvdata = getltsv(url)
