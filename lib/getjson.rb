@@ -8,11 +8,13 @@ require 'net/https'
 require 'uri'
 require 'json'
 
+require 'getltsv'
+
 def _getjson(project,page)
   uri = URI.parse("https://scrapbox.io/api/pages/#{project}/#{URI.encode(page)}/text")
 
   http = Net::HTTP.new(uri.host, uri.port)
-  http.use_ssl = true
+  http.use_ssl = true  # ************************
   http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
   req = Net::HTTP::Get.new(uri.path)
@@ -34,33 +36,50 @@ def _getjson(project,page)
     node = {}
     parents[indent+1] = node
     
-    if parents[indent]['children'].nil? then
-      parents[indent]['children'] = []
-    end
+    parents[indent]['children'] = [] if parents[indent]['children'].nil?
     
-    if line =~ /^\[\/([^\/]*)\/([^\/]*)\]/
+    if line =~ /^\[\/([^\/]*)\/([^\/]*)\]/ # 別のScrapboxデータ
       c = _getjson($1,$2)
       c['children'].each { |child|
         # parents[indent]['children'] << c['children'][0]
         parents[indent]['children'] << child
       }
     else
-      parents[indent]['children'] << node
-      if line =~ /^(\s*)\[(.*)\](.*)$/ then
+      #parents[indent]['children'] << node
+      if line =~ /^(\s*)\[(.*http.*)\](.*)$/ then # normal link to a content data
         head = $1
         content = $2
         tail = $3
         a = content.split(/ /)
+        title = ''
+        url = ''
         if a[0] =~ /http/ then
-          node['title'] = a[1..a.length-1].join(' ').force_encoding("utf-8")
-          node['url'] = a[0]
+          title = a[1..a.length-1].join(' ').force_encoding("utf-8")
+          url = a[0]
         elsif a[a.length-1] =~ /http/
-          node['title'] = a[0..a.length-2].join(' ').force_encoding("utf-8")
-          node['url'] = a[a.length-1]
+          title = a[0..a.length-2].join(' ').force_encoding("utf-8")
+          url = a[a.length-1]
+        end
+        if url =~ /\.ltsv$/ then
+          # Get the LTSV data and convert it to an object 
+          # e.g. http://video.masuilab.org/gear.ltsv
+          ltsvdata = getltsv(url)
+          d = {}
+          d['title'] = title
+          d['children'] = []
+          ltsvdata['children'].each { |data|
+            d['children'] << data
+          }
+          parents[indent]['children'] << d
+        else
+          node['title'] = title
+          node['url'] = url
+          parents[indent]['children'] << node
         end
       else
         line =~ /^(\s*)(.*)$/
         node['title'] = $2.force_encoding("utf-8")
+        parents[indent]['children'] << node
       end
     end
   }
