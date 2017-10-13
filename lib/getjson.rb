@@ -10,6 +10,7 @@ require 'json'
 
 require 'getltsv'
 require 'getrss'
+require 'getatom'
 
 def _getjson(project,page)
   uri = URI.parse("https://scrapbox.io/api/pages/#{project}/#{URI.encode(page)}/text")
@@ -62,7 +63,9 @@ def _getjson(project,page)
           url = a[a.length-1]
         end
 
-        if url =~ /\.rdf$/ || url =~ /(rss|feed)/ then
+        if url =~ /atom.xml/ then
+          parents[indent]['children'] << getatom(title,url)
+        elsif url =~ /\.rdf$/ || url =~ /(rss|feed)/ then
           parents[indent]['children'] << getrss(title,url)
         elsif url =~ /\.ltsv$/ then
           # Get the LTSV data and convert it to an object 
