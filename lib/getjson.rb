@@ -11,8 +11,13 @@ require 'json'
 require 'getltsv'
 require 'getrss'
 require 'getatom'
+require 'getbookmarks'
 
 def _getjson(project,page)
+  if page == "__bookmarks" then
+    return getbookmarks(project)
+  end
+
   uri = URI.parse("https://scrapbox.io/api/pages/#{project}/#{URI.encode(page)}/text")
 
   http = Net::HTTP.new(uri.host, uri.port)

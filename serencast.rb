@@ -10,12 +10,12 @@ require 'sinatra/cross_origin'
 
 # require 'getsbdata'
 require 'getjson'
+require 'getbookmarks'
 
 enable :cross_origin
 
-#get '/' do
-#  # getsbdata('masui','test').join("\n")
-#  getjson('masui','test')
+#get '/:project/__bookmarks' do |project|
+#  getbookmarks(project)
 #end
 
 get '/:project/:page' do |project,page|
