@@ -14,9 +14,13 @@ require 'getbookmarks'
 
 enable :cross_origin
 
-#get '/:project/__bookmarks' do |project|
-#  getbookmarks(project)
-#end
+get '/:project' do |project|
+  redirect "/#{project}/__bookmarks"
+end
+
+get '/:project/' do |project|
+  redirect "/#{project}"
+end
 
 get '/:project/:page' do |project,page|
   @project = project

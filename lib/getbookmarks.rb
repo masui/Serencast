@@ -14,6 +14,14 @@ def getbookmarks(project)
 
   pagelist = JSON.parse(res.body)
 
+  pagelist['pages'].each { |page|
+    page['descriptions'].each { |desc|
+      if desc =~ /^(\d+)\/(\d+)\/(\d+)$/ then
+        page['updated'] = Time.new($1,$2,$3).to_i
+      end
+    }
+  }
+
   curyear = 0
   curmonth = 0
   curday = 0
@@ -83,6 +91,6 @@ def getbookmarks(project)
 end
 
 if $0 == __FILE__ then
-  puts getbookmarks("satake-bookmarks").to_json
+  puts getbookmarks("masui-bookmarks").to_json
 end
   
