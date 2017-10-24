@@ -9,7 +9,7 @@ def getbookmarks(project)
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = true
   http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-  req = Net::HTTP::Get.new(uri.path + "?skip=100&limit=1000")
+  req = Net::HTTP::Get.new(uri.path + "?limit=1000")
 
   res = http.request(req)
 
@@ -78,12 +78,17 @@ def getbookmarks(project)
     desc.sub!(/\]$/,'')
     if desc !~ /^\s*$/ then
       a = desc.split(/\s/)
-      if a[0] =~ /http/ then
-        entry['title'] = a[1..a.length-1].join(' ').force_encoding("utf-8")
+      if a.length == 1 then
+        entry['title'] = page['title'].force_encoding("utf-8")
         entry['url'] = a[0]
-      elsif a[a.length-1] =~ /http/
-        entry['title'] = a[0..a.length-2].join(' ').force_encoding("utf-8")
-        entry['url'] = a[a.length-1]
+      else
+        if a[0] =~ /http/ then
+          entry['title'] = a[1..a.length-1].join(' ').force_encoding("utf-8")
+          entry['url'] = a[0]
+        elsif a[a.length-1] =~ /http/
+          entry['title'] = a[0..a.length-2].join(' ').force_encoding("utf-8")
+          entry['url'] = a[a.length-1]
+        end
       end
       daydata['children'] << entry
     end
@@ -92,6 +97,6 @@ def getbookmarks(project)
 end
 
 if $0 == __FILE__ then
-  puts getbookmarks("masui-bookmarks").to_json
+  # puts getbookmarks("masui-bookmarks").to_json
+  puts getbookmarks("Jazz").to_json
 end
-  
