@@ -5,11 +5,12 @@ require 'uri'
 require 'json'
 
 def getbookmarks(project)
-  uri = URI.parse("https://scrapbox.io/api/pages/#{project}")
+  uri = URI.parse("https://scrapbox.io/api/pages/#{project}?limit=1000") # skip=100&limit=200 , etc.
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = true
   http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-  req = Net::HTTP::Get.new(uri.path)
+  req = Net::HTTP::Get.new(uri.path + "?skip=100&limit=1000")
+
   res = http.request(req)
 
   pagelist = JSON.parse(res.body)
