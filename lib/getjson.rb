@@ -4,6 +4,8 @@
 # ScrapboxデータをJSONに変換
 #
 
+# $:.unshift File.dirname(__FILE__)
+
 require 'net/https'
 require 'uri'
 require 'json'
@@ -28,6 +30,8 @@ def _getjson(project,page)
   res = http.request(req)
 
   root = {}
+  root['children'] = []
+  root['title'] = 'root'
   parents = []
   parents[0] = root
   
@@ -43,6 +47,17 @@ def _getjson(project,page)
     node = {}
     parents[indent+1] = node
     
+    (0..indent).each { |i|
+      unless parents[i] then
+        parents[i] = {}
+        parents[i]['children'] = []
+        parents[i]['title'] = page
+        if i > 0 then
+          parents[i-1]['children'] << parents[i]
+        end
+      end
+    }
+
     parents[indent]['children'] = [] if parents[indent]['children'].nil?
     
     if line =~ /^\[\/([^\/]*)\/([^\/]*)\]/ # 別のScrapboxデータ
@@ -103,3 +118,7 @@ def getjson(project,page)
   _getjson(project,page)['children'].to_json
 end
 
+if __FILE__ == $0 then
+  # puts getjson('karin-bookmarks','__bookmarks').to_json
+  puts getjson('nikezonoCast','Masterpiece').to_json
+end
