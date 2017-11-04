@@ -85,7 +85,7 @@ def _getjson(project,page)
 
         if url =~ /atom.*\.xml/ then
           parents[indent]['children'] << getatom(title,url)
-        elsif url =~ /\.rdf$/ || url =~ /\/(rss|feed)/ || url =~ /(rss|feed)\// then
+        elsif url =~ /\.rdf$/ || url =~ /\/(rss|feed)/ || url =~ /(rss|feed)\// || url =~ /queryfeed.net/i || url =~ /twitrss.me\/twitter_user_to_rss/ || url =~ /\.rss$/ then
           parents[indent]['children'] << getrss(title,url)
         elsif url =~ /\.ltsv$/ then
           # Get the LTSV data and convert it to an object 
