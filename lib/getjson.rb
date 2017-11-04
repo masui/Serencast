@@ -83,7 +83,7 @@ def _getjson(project,page)
           url = a[a.length-1]
         end
 
-        if url =~ /atom.xml/ then
+        if url =~ /atom.*\.xml/ then
           parents[indent]['children'] << getatom(title,url)
         elsif url =~ /\.rdf$/ || url =~ /\/(rss|feed)/ || url =~ /(rss|feed)\// then
           parents[indent]['children'] << getrss(title,url)
