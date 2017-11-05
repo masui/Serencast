@@ -32,13 +32,13 @@ get '/:project/:page/json' do |project,page|
   getjson(project,page)
 end
 
-get '/' do
-  redirect 'https://masui.github.io/Serencast/'
-end
-
-get '/index.html' do
-  redirect 'https://masui.github.io/Serencast/'
-end
+# get '/' do
+#   redirect 'https://masui.github.io/Serencast/'
+# end
+# 
+# get '/index.html' do
+#   redirect 'https://masui.github.io/Serencast/'
+# end
 
 error do
   "Error!"

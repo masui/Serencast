@@ -1,2 +1,2 @@
-<a href="https://masui.github.io/Serencast/">GitHub page</a>
+<a href="http://Serencast.com">詳細</a>
 
