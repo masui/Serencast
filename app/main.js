@@ -1,3 +1,7 @@
+//
+// Serencastアプリの起動
+//
+
 'use strict';
 
 // Electronのモジュール

@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!--
+    Serencastアプリ
+-->
 <html>
   <head>
     <meta charset="UTF-8">
@@ -8,19 +11,16 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="javascripts/jquery.mousewheel.js"></script>
     <script>
-      var project = 'masui';
-      var page = 'Watch';
+      //var project = 'masui';
+      //var page = 'Watch';
+      var project = 'MasuiCast';
+      var page = 'Video';
       var json = `http://serencast.com/${project}/${page}/json`;
     </script>
     <script src="javascripts/gear.js"></script>
   </head>
   <body>
-    <webview id="webview" src="https://www.github.com/" style="display:flex; width:100%; height:100%"></webview>
-    <!--
-    <div id="webview_wrapper" height=600 style="width:900px;height:600px;background-color:#ffd;">
-      <webview id="webview" src="http://serencast.com" style="height:100%;"></webview>
-    </div>
-    -->
-    <div id='menu' style="position:absolute;width:120;height:100%;top:0;left:0;background-color:#ffd;"></div>
+    <webview id="webview" src="https://serencast.com/" style="display:flex;width:100%;height:100%"></webview>
+    <div id='menu' style="position:absolute;width:120;height:100%;top:0;left:0;background-color:rgba(255,255,200,0.7);"></div>
   </body>
 </html>

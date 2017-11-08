@@ -1,5 +1,6 @@
 Electronでアプリにしてみる
 
-Reactにする必要があるかないか
+* Reactは使わない
 
-https://qiita.com/nyanchu/items/15d514d9b9f87e5c0a29
+* Electronアプリの作り方
+  https://qiita.com/nyanchu/items/15d514d9b9f87e5c0a29

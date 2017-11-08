@@ -6,3 +6,6 @@ icon:
 
 program:
 	coffee -c -b public/javascripts/gear.coffee
+
+mac:
+	electron-packager ./app serencast --overwrite --platform=darwin --arch=x64 --electronVersion=0.36.1

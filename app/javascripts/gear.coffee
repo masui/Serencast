@@ -62,18 +62,6 @@ initData = (nodes,parent,level) -> # 木構造をセットアップ
     initData(node.children,node,level+1) if node.children
 
 $ -> # document.ready()
-  # webview_wrapper = document.getElementById("webview_wrapper");
-  # # create_new_webview_instanse
-  # newWebview = document.createElement("webview");
-  # newWebview.id = "webview";
-  # newWebview.setAttribute("src","http://serencast.com");
-  # newWebview.setAttribute("display","inline-flex");
-  # newWebview.setAttribute("autosize","on");
-  # newWebview.setAttribute("minheight",800);
-  # newWebview.setAttribute("maxheight",800);
-  # webview_wrapper.appendChild(newWebview);
-  # webview_wrapper.setAttribute("height",800);
-
   if node_app
     # v0.10からMacではこれが必要らしい
     nw = require 'nw.gui'
@@ -240,15 +228,8 @@ display = (newNodeList) -> # calc()で計算したリストを表示
           $('#iframe').attr 'src',url
     else
       $.contentswin[0].setAttribute "src", url
-      #console.log $.contentswin.css('height',screen.availHeight);
-      console.log $.contentswin.css('height',screen.height);
-      # console.log $.contentswin.css('height',800);
-      console.log $.contentswin.css('height')
-      # $.contentswin[0].setAttribute "width", '1000'
-      # $.contentswin[0].setAttribute "height", '600'
-    	# $.contentswin.attr[0].src = url
-    	#$.contentswin.location.href = url
-      $('#menu').css('width',150);
+      $.contentswin.css('height',screen.height);
+      $('#menu').css('width',150); # 何故ここで?
 
   # 新しいノードの表示位置計算
   node = nodeList[0]
