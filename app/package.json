@@ -1,0 +1,16 @@
+{
+    "name": "app",
+    "version": "1.0.0",
+    "description": "SerencastのElectronでアプリ",
+    "main": "main.js",
+    "repository": {
+	"type": "git",
+	"url": "git@github.com:masui/Serencast.git"
+    },
+    "scripts": {
+	"test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Toshiyuki Masui",
+    "license": "ISC"
+}
