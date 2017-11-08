@@ -8,3 +8,6 @@ mac: program
 
 run: program
 	electron .
+
+anime: program
+	electron . MasuiCast Anime

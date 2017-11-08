@@ -9,7 +9,9 @@
     },
     "scripts": {
 	"test": "echo \"Error: no test specified\" && exit 1",
-	"start": "electron ."
+	"start": "electron .",
+	"anime": "electron . MasuiCast Anime",
+	"full": "electron . masui Watch"
     },
     "keywords": [],
     "author": "Toshiyuki Masui",

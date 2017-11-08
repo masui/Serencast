@@ -16,6 +16,12 @@ const BrowserWindow = electron.BrowserWindow;
 // メインウィンドウはGCされないようにグローバル宣言
 let mainWindow;
 
+// 引数解析
+var project = process.argv[2];
+if(! project) project = "masui";
+var page = process.argv[3];
+if(! page) page = "Watch";
+
 // 全てのウィンドウが閉じたら終了
 app.on('window-all-closed', function() {
     if (process.platform != 'darwin') {
@@ -34,7 +40,7 @@ app.on('ready', function() {
 	height: size.height,
 	fullscreen: true
     });
-    mainWindow.loadURL('file://' + __dirname + '/index.html');
+    mainWindow.loadURL('file://' + __dirname + `/index.html?project=${project}&page=${page}`);
     // mainWindow.loadURL('http://twitter.com');
 
     // ウィンドウが閉じられたらアプリも終了
