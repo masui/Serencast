@@ -41,7 +41,6 @@ app.on('ready', function() {
 	fullscreen: true
     });
     mainWindow.loadURL('file://' + __dirname + `/index.html?project=${project}&page=${page}`);
-    // mainWindow.loadURL('http://twitter.com');
 
     // ウィンドウが閉じられたらアプリも終了
     mainWindow.on('closed', function() {
