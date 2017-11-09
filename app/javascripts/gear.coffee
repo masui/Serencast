@@ -46,6 +46,7 @@ typeCount = 0           # 連打したかどうか: 連打されてたら表示�
 typeCountTimeout = null
 
 menuEraseTimeout = null
+menuErased = false
 
 loadData = ->
   $.getJSON json, (data) ->
@@ -151,6 +152,7 @@ expand = -> # 注目してるエントリの子供を段階的に展開する
     $('.line').addClass 'erase_line'
     $('#menu').removeClass 'show_menu'
     $('#menu').addClass 'erase_menu'
+    menuErased = true
   , 3000
 
 intValue = (s) ->
@@ -382,7 +384,12 @@ $(window).mousewheel (event, delta, deltaX, deltaY) ->
     $('.line').addClass 'erase_line'
     $('#menu').removeClass 'show_menu'
     $('#menu').addClass 'erase_menu'
+    menuErased = true
   , 3000
+
+  if menuErased
+    menuErased = false
+    return
   
   d = (if delta < 0 then 1 else -1)
   move d, 0
