@@ -45,6 +45,8 @@ hideTimeout = null
 typeCount = 0           # 連打したかどうか: 連打されてたら表示を行なう
 typeCountTimeout = null
 
+menuEraseTimeout = null
+
 loadData = ->
   $.getJSON json, (data) ->
     initData data, null, 0
@@ -98,6 +100,8 @@ $ -> # document.ready()
   #else
   #  $('#menu').css('left','10pt')
 
+  $('#menu').addClass 'show_menu'
+
 refresh = -> # 不要DOMを始末する. 富豪的すぎるかも?
   span.show() for i, span of spans
   span.remove() for i, span of oldSpans
@@ -135,6 +139,19 @@ expand = -> # 注目してるエントリの子供を段階的に展開する
     say nodeList[0].children[0] if useAudio
     calc nodeList[0].children[0]
     expandTimeout = setTimeout expand, StepTime
+
+  $('.line').removeClass 'erase_line'
+  $('.line').addClass 'show_line'
+  $('#menu').removeClass 'erase_menu'
+  $('#menu').addClass 'show_menu'
+  clearTimeout menuEraseTimeout
+  menuEraseTimeout = setTimeout ()->
+    $('.line').removeClass 'show_line'
+    $('.line').removeClass 'show_selected_line'
+    $('.line').addClass 'erase_line'
+    $('#menu').removeClass 'show_menu'
+    $('#menu').addClass 'erase_menu'
+  , 3000
 
 intValue = (s) ->
   Number s.replace(/px/,'')
@@ -235,7 +252,7 @@ display = (newNodeList) -> # calc()で計算したリストを表示
     else
       $.contentswin[0].setAttribute "src", url
       $.contentswin.css('height',screen.height);
-      $('#menu').css('width',150); # 何故ここで?
+      $('#menu').css('width',250); # 何故ここで??????
 
   # 新しいノードの表示位置計算
   node = nodeList[0]
@@ -354,6 +371,19 @@ move = (delta, shrinkMode) -> # 視点移動
 #});
 
 $(window).mousewheel (event, delta, deltaX, deltaY) ->
+  $('.line').removeClass 'erase_line'
+  $('.line').addClass 'show_line'
+  $('#menu').removeClass 'erase_menu'
+  $('#menu').addClass 'show_menu'
+  clearTimeout menuEraseTimeout
+  menuEraseTimeout = setTimeout ()->
+    $('.line').removeClass 'show_line'
+    $('.line').removeClass 'show_selected_line'
+    $('.line').addClass 'erase_line'
+    $('#menu').removeClass 'show_menu'
+    $('#menu').addClass 'erase_menu'
+  , 4000
+  
   d = (if delta < 0 then 1 else -1)
   move d, 0
 
@@ -397,33 +427,23 @@ movefunc = (e) ->
     $.step = newstep
 
 keydownfunc = (e) ->
-  $('.line').removeClass 'erase_line'
-  $('.line').addClass 'show_line'
-  $('#menu').removeClass 'erase_menu'
-  $('#menu').addClass 'show_menu'
-  setTimeout ()->
-    $('.line').removeClass 'show_line'
-    $('.line').removeClass 'show_selected_line'
-    $('.line').addClass 'erase_line'
-    $('#menu').removeClass 'show_menu'
-    $('#menu').addClass 'erase_menu'
-  , 3000
-
   switch e.keyCode
     when 37 then move(-1,1) # 左
     when 38 then move(-1,0) # 上
     when 39 then move(1,1)  # 右
     when 40 then move(1,0)  # 下
 
-$(window).on
-  'mousedown':  downfunc
-  'touchstart': downfunc
-  'mouseup':    upfunc
-  'touchend':   upfunc
-  'mousemove':  movefunc
-  'touchmove':  movefunc
-  'keydown':    keydownfunc
-  'resize':     resizefunc
+# $('#menu').on
+
+# $(window).on
+#   'keydown':    keydownfunc
+#   'mousedown':  downfunc
+#   'touchstart': downfunc
+#   'mouseup':    upfunc
+#   'touchend':   upfunc
+#   'mousemove':  movefunc
+#   'touchmove':  movefunc
+#   'resize':     resizefunc
 
 setup_paddle = ->
   socket = io.connect "http://localhost:3000"
