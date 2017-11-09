@@ -150,9 +150,15 @@ dispLine = (node,ind,top,color,bold,showloading) ->
 
   fontsize = (if singleWindow then 18 else 11)
   span = $('<span>')
-  span.attr 'class', 'line'
+  # span.attr 'class', 'line'
+  span.addClass 'line'
+  span.addClass 'show_line'
   span.css 'width', $('#menu').css('width')
-  span.css 'color', color
+  # span.css 'color', color
+  if color == '#000000'
+    span.addClass 'show_line'
+  else
+    span.addClass 'show_selected_line'
   span.css 'top', top # String(top)
   span.css 'font-weight','bold' if bold
   span.css 'font-size', "#{fontsize}pt"
@@ -391,6 +397,18 @@ movefunc = (e) ->
     $.step = newstep
 
 keydownfunc = (e) ->
+  $('.line').removeClass 'erase_line'
+  $('.line').addClass 'show_line'
+  $('#menu').removeClass 'erase_menu'
+  $('#menu').addClass 'show_menu'
+  setTimeout ()->
+    $('.line').removeClass 'show_line'
+    $('.line').removeClass 'show_selected_line'
+    $('.line').addClass 'erase_line'
+    $('#menu').removeClass 'show_menu'
+    $('#menu').addClass 'erase_menu'
+  , 3000
+
   switch e.keyCode
     when 37 then move(-1,1) # 左
     when 38 then move(-1,0) # 上

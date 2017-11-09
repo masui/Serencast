@@ -11,10 +11,11 @@ span {
 }
 
 .line {
-	position: absolute;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
+    position: absolute;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 30;
 }
 
 #iframe {
