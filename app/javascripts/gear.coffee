@@ -382,7 +382,7 @@ $(window).mousewheel (event, delta, deltaX, deltaY) ->
     $('.line').addClass 'erase_line'
     $('#menu').removeClass 'show_menu'
     $('#menu').addClass 'erase_menu'
-  , 4000
+  , 3000
   
   d = (if delta < 0 then 1 else -1)
   move d, 0

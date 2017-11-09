@@ -21,12 +21,21 @@ var project = process.argv[2];
 if(! project) project = "masui";
 var page = process.argv[3];
 if(! page) page = "Watch";
+var username = process.argv[4];
+var password = process.argv[5];
 
 // 全てのウィンドウが閉じたら終了
 app.on('window-all-closed', function() {
     if (process.platform != 'darwin') {
 	app.quit();
     }
+});
+
+// % electron . project page username password
+// Quoted from electron.atom.io
+app.on('login', function(event, webContents, request, authInfo, callback) {
+    event.preventDefault();
+    callback(username, password);
 });
 
 // Electronの初期化完了後に実行
