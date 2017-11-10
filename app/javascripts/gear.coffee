@@ -439,8 +439,10 @@ keydownfunc = (e) ->
     when 38 then move(-1,0) # 上
     when 39 then move(1,1)  # 右
     when 40 then move(1,0)  # 下
+    else return false
 
-# $('#menu').on
+$(window).on
+  'keydown':    keydownfunc
 
 # $(window).on
 #   'keydown':    keydownfunc
