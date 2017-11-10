@@ -1,6 +1,10 @@
 Electronでアプリにしてみる
 
 * Reactは使わない
+  jQueryだけで作る
 
 * Electronアプリの作り方
   https://qiita.com/nyanchu/items/15d514d9b9f87e5c0a29
+
+* dmg作成
+  http://shibe97.hatenablog.com/entry/2017/02/17/090000

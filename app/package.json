@@ -1,19 +1,31 @@
 {
-    "name": "Serencast",
-    "version": "1.0.0",
-    "description": "SerencastのElectronアプリ",
-    "main": "main.js",
-    "repository": {
-	"type": "git",
-	"url": "git@github.com:masui/Serencast.git"
+  "name": "Serencast",
+  "version": "1.0.0",
+  "description": "SerencastのElectronアプリ",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:masui/Serencast.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "anime": "electron . MasuiCast Anime",
+    "full": "electron . masui Watch"
+  },
+  "keywords": [],
+  "author": "Toshiyuki Masui",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^4.0.0"
+  },
+  "build": {
+    "appId": "com.pitecan.serencast",
+    "mac": {
+      "target": "dmg"
     },
-    "scripts": {
-	"test": "echo \"Error: no test specified\" && exit 1",
-	"start": "electron .",
-	"anime": "electron . MasuiCast Anime",
-	"full": "electron . masui Watch"
-    },
-    "keywords": [],
-    "author": "Toshiyuki Masui",
-    "license": "MIT"
+    "directories": {
+      "output": "docs"
+    }
+  }
 }
