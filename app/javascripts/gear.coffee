@@ -48,6 +48,9 @@ typeCountTimeout = null
 menuEraseTimeout = null
 menuErased = false
 
+lastActionTime = 0
+currentActionTime = 0
+
 loadData = ->
   $.getJSON json, (data) ->
     initData data, null, 0
@@ -141,19 +144,7 @@ expand = -> # 注目してるエントリの子供を段階的に展開する
     calc nodeList[0].children[0]
     expandTimeout = setTimeout expand, StepTime
 
-  $('.line').removeClass 'erase_line'
-  $('.line').addClass 'show_line'
-  $('#menu').removeClass 'erase_menu'
-  $('#menu').addClass 'show_menu'
-  clearTimeout menuEraseTimeout
-  menuEraseTimeout = setTimeout ()->
-    $('.line').removeClass 'show_line'
-    $('.line').removeClass 'show_selected_line'
-    $('.line').addClass 'erase_line'
-    $('#menu').removeClass 'show_menu'
-    $('#menu').addClass 'erase_menu'
-    menuErased = true
-  , 3000
+  setEraseTiming()
 
 intValue = (s) ->
   Number s.replace(/px/,'')
@@ -372,20 +363,31 @@ move = (delta, shrinkMode) -> # 視点移動
 #    setTimeout(window.focus,100);
 #});
 
-$(window).mousewheel (event, delta, deltaX, deltaY) ->
+getActionTime = () ->
+  lastActionTime = currentActionTime
+  currentActionTime = new Date().getTime()
+
+# メニューを消すCSS transition
+setEraseTiming = () ->
   $('.line').removeClass 'erase_line'
   $('.line').addClass 'show_line'
   $('#menu').removeClass 'erase_menu'
   $('#menu').addClass 'show_menu'
   clearTimeout menuEraseTimeout
+  console.log currentActionTime - lastActionTime
   menuEraseTimeout = setTimeout ()->
-    $('.line').removeClass 'show_line'
-    $('.line').removeClass 'show_selected_line'
-    $('.line').addClass 'erase_line'
-    $('#menu').removeClass 'show_menu'
-    $('#menu').addClass 'erase_menu'
+    if currentActionTime - lastActionTime > 1000
+      $('.line').removeClass 'show_line'
+      $('.line').removeClass 'show_selected_line'
+      $('.line').addClass 'erase_line'
+      $('#menu').removeClass 'show_menu'
+      $('#menu').addClass 'erase_menu'
     menuErased = true
   , 3000
+
+$(window).mousewheel (event, delta, deltaX, deltaY) ->
+  getActionTime()
+  setEraseTiming()
 
   if menuErased
     menuErased = false
@@ -434,6 +436,13 @@ movefunc = (e) ->
     $.step = newstep
 
 keydownfunc = (e) ->
+  getActionTime()
+  setEraseTiming()
+
+  if menuErased
+    menuErased = false
+    return
+
   switch e.keyCode
     when 37 then move(-1,1) # 左
     when 38 then move(-1,0) # 上
