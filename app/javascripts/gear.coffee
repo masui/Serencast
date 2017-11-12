@@ -31,9 +31,9 @@ spans = {}        # 表示されるspan要素のリスト
 oldSpans = {}
 
 #StepTime = 1000         # 段階的展開のタイムアウト時間   ?????
-StepTime = 400         # 段階的展開のタイムアウト時間   ?????
-#ExpandTime = 1500       # 無操作時展開のタイムアウト時間
-ExpandTime = 900       # 無操作時展開のタイムアウト時間
+StepTime = 1000         # 段階的展開のタイムアウト時間   ?????
+ExpandTime = 2000       # 無操作時展開のタイムアウト時間
+#ExpandTime = 900       # 無操作時展開のタイムアウト時間
 expandTimeout = null
 
 AnimationTime = 300     # ズーミングのアニメーション時間
@@ -184,10 +184,10 @@ dispLine = (node,ind,top,color,bold,showloading) ->
 
   span.text Array(node.level+1).join("　")+"・#{node.title}" # strをx回繰り返し
 
-  #if showloading # ローディングGIFアニメ表示
-  #  #  http://preloaders.net/ で作成したロード中アイコンを利用
-  #  span.append $(' <span>&nbsp;</span>')
-  #  span.append $('<img src="/images/loading.gif" style="height:12pt;">')
+  if showloading # ローディングGIFアニメ表示
+    # http://preloaders.net/ で作成したロード中アイコンを利用
+    $('<span>').text(' ').appendTo(span)
+    $('<img>').attr('src',"images/loading.gif").css('height','12pt').appendTo(span);
 
   $('#menu').append span
 
