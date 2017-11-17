@@ -10,8 +10,8 @@ run: program
 	electron .
 
 anime: program
-	electron . MasuiCast Anime
-# npm run anime でもいい
+	npm run anime
+#	electron . MasuiCast Anime
 
 dmg:
 	electron-builder
