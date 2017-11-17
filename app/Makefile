@@ -1,20 +1,28 @@
-program:
+compile:
 	coffee -c -b javascripts/gear.coffee
 
-mac: program
-	- cd ..; /bin/rm -r -f serencast-darwin-x64
-	cd ..; make mac
-#	mv ../serencast-darwin-x64 .
+install:
+	npm install
 
-run: program
-	electron .
+run: compile
+	npm start
+start: run
 
-anime: program
+anime: compile
 	npm run anime
-#	electron . MasuiCast Anime
 
-dmg:
+DMG=docs/Serencast-1.0.0.dmg
+APP=docs/mac/Serencast.app/
+
+# docsの下にdmgやappを生成
+dmg: compile install
 	electron-builder
 
 dmg-upload:
-	scp docs/Serencast-1.0.0.dmg Serencast.com:/home/masui/Serencast/public/Serencast.dmg
+	scp ${DMG} Serencast.com:/home/masui/Serencast/public/Serencast.dmg
+
+run-mac:
+	open ${APP}
+
+clean:
+	/bin/rm -r -f node_modules docs *~
