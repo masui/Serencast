@@ -16,7 +16,7 @@ APP=docs/mac/Serencast.app/
 
 # docsの下にdmgやappを生成
 dmg: compile install
-	electron-builder
+	npm run dmg
 
 dmg-upload:
 	scp ${DMG} Serencast.com:/home/masui/Serencast/public/Serencast.dmg
