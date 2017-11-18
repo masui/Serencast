@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+#
+# Electron版Serencastに引数を渡す
+#
+
+if !ARGV[0] || !ARGV[1]
+  STDERR.puts "% sc MasuiCast Anime"
+  exit
+end
+
+project = ARGV[0]
+page = ARGV[1]
+system "SERENCAST_PROJECT=#{project} SERENCAST_PAGE=#{page} electron /Users/masui/Serencast/app"
+# これだと駄目?
+# system "SERENCAST_PROJECT=#{project} SERENCAST_PAGE=#{page} open /Users/masui/Serencast/app/docs/mac/Serencast.app"
