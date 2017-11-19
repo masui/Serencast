@@ -10,6 +10,13 @@ end
 
 project = ARGV[0]
 page = ARGV[1]
-system "SERENCAST_PROJECT=#{project} SERENCAST_PAGE=#{page} electron /Users/masui/Serencast/app"
-# これだと駄目?
-# system "SERENCAST_PROJECT=#{project} SERENCAST_PAGE=#{page} open /Users/masui/Serencast/app/docs/mac/Serencast.app"
+
+if File.exist?("/Users/masui/Serencast/app/docs/mac/Serencast.app/Contents/MacOS/Serencast") then
+  system <<EOF
+export SERENCAST_PROJECT=#{project}
+export SERENCAST_PAGE=#{page}
+open -a /Users/masui/Serencast/app/docs/mac/Serencast.app/Contents/MacOS/Serencast
+EOF
+else
+  system "SERENCAST_PROJECT=#{project} SERENCAST_PAGE=#{page} electron /Users/masui/Serencast/app"
+end
