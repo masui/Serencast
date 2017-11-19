@@ -8,3 +8,8 @@ Electronでアプリにしてみる
 
 * dmg作成
   http://shibe97.hatenablog.com/entry/2017/02/17/090000
+
+Issues
+ * メニューのサイズ
+ * メニューをCSSアニメーション
+ * node-webkit時代のソースを整理
