@@ -4,16 +4,12 @@ require 'net/https'
 require 'uri'
 require 'json'
 
-def getbookmarks(project)
-  uri = URI.parse("https://scrapbox.io/api/pages/#{project}?limit=1000") # skip=100&limit=200 , etc.
-  http = Net::HTTP.new(uri.host, uri.port)
-  http.use_ssl = true
-  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-  req = Net::HTTP::Get.new(uri.path + "?limit=1000")
+require 'get'
 
-  res = http.request(req)
-
-  pagelist = JSON.parse(res.body)
+def getbookmarks(project,title="Bookmarks")
+  res = get("https://scrapbox.io/api/pages/#{project}?limit=1000")
+  return unless res
+  pagelist = JSON.parse(res)
 
   pagelist['pages'].each { |page|
     page['descriptions'].each { |desc|
@@ -28,11 +24,11 @@ def getbookmarks(project)
   curday = 0
   
   root = {}
-  root['title'] = "Bookmarks"
+  root['title'] = title # "Bookmarks"
   root['children'] = []
 
   rootroot = {}
-  rootroot['title'] = "Bookmarks"
+  rootroot['title'] = title # "Bookmarks"
   rootroot['children'] = [root]
 
   yeardata = {}

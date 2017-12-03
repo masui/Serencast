@@ -15,27 +15,34 @@ require 'getrss'
 require 'getatom'
 require 'getbookmarks'
 
-def _getjson(project,page)
-  if page == "__bookmarks" then
-    return getbookmarks(project)
+require 'get'
+
+def _getjson(project,page=nil)
+  if page == "__bookmarks"
+    return getbookmarks(project,"Bookmarks")
   end
+  if page.to_s == ''
+    s = get("https://scrapbox.io/api/code/#{project}/settings/config.rb")
+    eval s if s
 
-  uri = URI.parse("https://scrapbox.io/api/pages/#{project}/#{URI.encode(page)}/text")
+    dispname = project
+    res = get("https://scrapbox.io/api/projects/#{project}")
+    if res
+      projinfo = JSON.parse(res)
+      dispname = projinfo['displayName']
+    end
 
-  http = Net::HTTP.new(uri.host, uri.port)
-  http.use_ssl = true  # ************************
-  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-  req = Net::HTTP::Get.new(uri.path)
-  res = http.request(req)
+    return getbookmarks(project,dispname)
+  end
 
   root = {}
   root['children'] = []
   root['title'] = 'root'
   parents = []
   parents[0] = root
-  
-  a = res.body.split(/\n/)
+
+  res = get("https://scrapbox.io/api/pages/#{project}/#{URI.encode(page)}/text")
+  a = res.split(/\n/)
   a.shift # 先頭のタイトルを除去
   a.each { |line|
     next if line =~ /^\s*$/
@@ -60,7 +67,12 @@ def _getjson(project,page)
 
     parents[indent]['children'] = [] if parents[indent]['children'].nil?
     
-    if line =~ /^\[\/([^\/]*)\/([^\/]*)\]/ # 別のScrapboxデータ
+    if line =~ /^\[\/([^\/]*)\/?\]/ # 別のScrapboxデータ
+      c = _getjson($1)
+      c['children'].each { |child|
+        parents[indent]['children'] << child
+      }
+    elsif line =~ /^\[\/([^\/]*)\/([^\/]*)\]/ # 別のScrapboxデータ
       c = _getjson($1,$2)
       c['children'].each { |child|
         # parents[indent]['children'] << c['children'][0]
@@ -114,11 +126,13 @@ def _getjson(project,page)
   return root
 end
   
-def getjson(project,page)
+def getjson(project,page=nil)
   _getjson(project,page)['children'].to_json
 end
 
 if __FILE__ == $0 then
   # puts getjson('karin-bookmarks','__bookmarks').to_json
-  puts getjson('nikezonoCast','Masterpiece').to_json
+  # puts getjson('nikezonoCast','Masterpiece').to_json
+  # puts getjson('masui-bookmarks').to_json
+  puts getjson('MasuiCast','Bookmarks').to_json
 end
