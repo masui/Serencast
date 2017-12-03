@@ -17,7 +17,7 @@ require 'getbookmarks'
 
 require 'get'
 
-def _getscdata(project,page=nil)
+def _getsbdata(project,page=nil)
   if page == "__bookmarks"
     return getbookmarks(project,"Bookmarks")
   end
@@ -68,12 +68,12 @@ def _getscdata(project,page=nil)
     parents[indent]['children'] = [] if parents[indent]['children'].nil?
     
     if line =~ /^\[\/([^\/]*)\/?\]/ # 別のScrapboxデータ
-      c = _getscdata($1)
+      c = _getsbdata($1)
       c['children'].each { |child|
         parents[indent]['children'] << child
       }
     elsif line =~ /^\[\/([^\/]*)\/([^\/]*)\]/ # 別のScrapboxデータ
-      c = _getscdata($1,$2)
+      c = _getsbdata($1,$2)
       c['children'].each { |child|
         # parents[indent]['children'] << c['children'][0]
         parents[indent]['children'] << child
@@ -126,13 +126,13 @@ def _getscdata(project,page=nil)
   return root
 end
   
-def getscdata(project,page=nil)
-  _getscdata(project,page)['children']
+def getsbdata(project,page=nil)
+  _getsbdata(project,page)['children']
 end
 
 if __FILE__ == $0 then
-  # puts getscdata('karin-bookmarks','__bookmarks').to_json
-  # puts getscdata('nikezonoCast','Masterpiece').to_json
-  # puts getscdata('masui-bookmarks').to_json
-  puts getscdata('MasuiCast','Bookmarks').to_json
+  # puts getsbdata('karin-bookmarks','__bookmarks').to_json
+  # puts getsbdata('nikezonoCast','Masterpiece').to_json
+  # puts getsbdata('masui-bookmarks').to_json
+  puts getsbdata('MasuiCast','Bookmarks').to_json
 end
