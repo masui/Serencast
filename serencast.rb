@@ -12,7 +12,9 @@ require 'sinatra/cross_origin'
 require 'getjson'
 require 'getbookmarks'
 
-enable :cross_origin
+configure do
+  enable :cross_origin
+end
 
 get '/:project' do |project|
   redirect "/#{project}/__bookmarks"
@@ -29,6 +31,7 @@ get '/:project/:page' do |project,page|
 end
 
 get '/:project/:page/json' do |project,page|
+  response['Access-Control-Allow-Origin'] = '*'
   getjson(project,page)
 end
 
