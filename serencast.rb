@@ -8,9 +8,7 @@ require 'rubygems'
 require 'sinatra'
 require 'sinatra/cross_origin'
 
-# require 'getsbdata'
-# require 'getjson'
-require 'getbookmarks'
+require 'gethistory'
 require 'getsbdata'
 
 configure do

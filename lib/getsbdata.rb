@@ -13,13 +13,13 @@ require 'json'
 require 'getltsv'
 require 'getrss'
 require 'getatom'
-require 'getbookmarks'
+require 'gethistory'
 
 require 'get'
 
 def _getsbdata(project,page=nil)
   if page == "__bookmarks"
-    return getbookmarks(project,"Bookmarks")
+    return gethistory(project,"Bookmarks")
   end
   if page.to_s == ''
     s = get("https://scrapbox.io/api/code/#{project}/settings/config.rb")
@@ -32,7 +32,7 @@ def _getsbdata(project,page=nil)
       dispname = projinfo['displayName']
     end
 
-    return getbookmarks(project,dispname)
+    return gethistory(project,dispname)
   end
 
   root = {}

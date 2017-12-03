@@ -6,7 +6,7 @@ require 'json'
 
 require 'get'
 
-def getbookmarks(project,title="Bookmarks")
+def gethistory(project,title="Bookmarks")
   res = get("https://scrapbox.io/api/pages/#{project}?limit=1000")
   return unless res
   pagelist = JSON.parse(res)
@@ -93,6 +93,6 @@ def getbookmarks(project,title="Bookmarks")
 end
 
 if $0 == __FILE__ then
-  # puts getbookmarks("masui-bookmarks").to_json
-  puts getbookmarks("Jazz").to_json
+  # puts gethistory("masui-bookmarks").to_json
+  puts gethistory("Jazz").to_json
 end
