@@ -9,8 +9,9 @@ require 'sinatra'
 require 'sinatra/cross_origin'
 
 # require 'getsbdata'
-require 'getjson'
+# require 'getjson'
 require 'getbookmarks'
+require 'getscdata'
 
 configure do
   enable :cross_origin
@@ -32,7 +33,7 @@ end
 
 get '/:project/:page/json' do |project,page|
   response['Access-Control-Allow-Origin'] = '*'
-  getjson(project,page)
+  getscdata(project,page).to_json
 end
 
 # get '/' do

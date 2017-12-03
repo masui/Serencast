@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # -*- ruby -*-
 #
-# ScrapboxデータをJSONに変換
+# Scrapboxデータを取得
 #
 
 # $:.unshift File.dirname(__FILE__)
@@ -17,7 +17,7 @@ require 'getbookmarks'
 
 require 'get'
 
-def _getjson(project,page=nil)
+def _getscdata(project,page=nil)
   if page == "__bookmarks"
     return getbookmarks(project,"Bookmarks")
   end
@@ -68,12 +68,12 @@ def _getjson(project,page=nil)
     parents[indent]['children'] = [] if parents[indent]['children'].nil?
     
     if line =~ /^\[\/([^\/]*)\/?\]/ # 別のScrapboxデータ
-      c = _getjson($1)
+      c = _getscdata($1)
       c['children'].each { |child|
         parents[indent]['children'] << child
       }
     elsif line =~ /^\[\/([^\/]*)\/([^\/]*)\]/ # 別のScrapboxデータ
-      c = _getjson($1,$2)
+      c = _getscdata($1,$2)
       c['children'].each { |child|
         # parents[indent]['children'] << c['children'][0]
         parents[indent]['children'] << child
@@ -126,13 +126,13 @@ def _getjson(project,page=nil)
   return root
 end
   
-def getjson(project,page=nil)
-  _getjson(project,page)['children'].to_json
+def getscdata(project,page=nil)
+  _getscdata(project,page)['children']
 end
 
 if __FILE__ == $0 then
-  # puts getjson('karin-bookmarks','__bookmarks').to_json
-  # puts getjson('nikezonoCast','Masterpiece').to_json
-  # puts getjson('masui-bookmarks').to_json
-  puts getjson('MasuiCast','Bookmarks').to_json
+  # puts getscdata('karin-bookmarks','__bookmarks').to_json
+  # puts getscdata('nikezonoCast','Masterpiece').to_json
+  # puts getscdata('masui-bookmarks').to_json
+  puts getscdata('MasuiCast','Bookmarks').to_json
 end
