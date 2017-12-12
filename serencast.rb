@@ -8,11 +8,12 @@ require 'rubygems'
 require 'sinatra'
 require 'sinatra/cross_origin'
 
-# require 'getsbdata'
-require 'getjson'
-require 'getbookmarks'
+require 'gethistory'
+require 'getsbdata'
 
-enable :cross_origin
+configure do
+  enable :cross_origin
+end
 
 get '/:project' do |project|
   redirect "/#{project}/__bookmarks"
@@ -29,7 +30,8 @@ get '/:project/:page' do |project,page|
 end
 
 get '/:project/:page/json' do |project,page|
-  getjson(project,page)
+  response['Access-Control-Allow-Origin'] = '*'
+  getsbdata(project,page).to_json
 end
 
 # get '/' do
