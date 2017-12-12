@@ -244,7 +244,8 @@ display = (newNodeList) -> # calc()で計算したリストを表示
           $('#iframe').attr 'src',url
     else
       $.contentswin[0].setAttribute "src", url
-      $.contentswin.css('height',screen.height);
+      $.contentswin[0].setAttribute "id", "ELECTRON" # ????
+      $.contentswin.css('height',screen.height)
       $('#menu').css('width',250); # 何故ここで??????
 
   # 新しいノードの表示位置計算

@@ -44,6 +44,9 @@ app.on('login', function(event, webContents, request, authInfo, callback) {
     if(authInfo.host == 'video.masuilab.org'){
         callback(process.env.VIDEOM_USER, process.env.VIDEOM_PASS);
     }		
+    if(authInfo.host == 'masui.sfc.keio.ac.jp'){
+        callback(process.env.MASUI_SFC_USER, process.env.MASUI_SFC_PASS);
+    }		
 });
 
 // Electronの初期化完了後に実行

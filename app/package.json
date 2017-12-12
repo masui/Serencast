@@ -11,6 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "anime": "electron . MasuiCast Anime",
+    "gyaon": "electron . masui gyaon",
     "full": "electron . masui Watch",
     "dmg": "electron-builder"
   },
@@ -18,7 +19,8 @@
   "author": "Toshiyuki Masui",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^4.0.0"
+    "dotenv": "^4.0.0",
+    "electron-referer": "^0.3.0"
   },
   "devDependencies": {
     "electron": "^1.7.9",

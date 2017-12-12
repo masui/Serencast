@@ -11,6 +11,9 @@ start: run
 anime: compile
 	npm run anime
 
+gyaon: compile
+	npm run gyaon
+
 DMG=docs/Serencast-1.0.0.dmg
 APP=docs/mac/Serencast.app/
 
