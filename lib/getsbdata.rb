@@ -45,8 +45,10 @@ def _getsbdata(project,page=nil)
   a = res.split(/\n/)
   a.shift # 先頭のタイトルを除去
   a.each { |line|
+    # 空行やコメントをスキップ
+    # もっといろんな文字をコメントにできるようにした方がいいかも
     next if line =~ /^\s*$/
-    next if line =~ /^\s*#/
+    next if line =~ /^\s*[#>%]/
     
     line.sub!(/^(\s*)/,'')
     indent = $&.length
