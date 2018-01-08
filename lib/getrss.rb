@@ -133,7 +133,8 @@ end
 if $0 == __FILE__
   require 'json'
   # puts getrss('asahi','http://www3.asahi.com/rss/index.rdf').to_json
-  puts getrss('hondana','http://hondana.org/atom.xml').to_json
+  # puts getrss('hondana','http://hondana.org/atom.xml').to_json
+  puts getrss('sasaken','https://rumors.kento.work/users/306/rss.rss').to_json
 end
 
 
