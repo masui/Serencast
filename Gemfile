@@ -1,3 +1,3 @@
 source 'https://rubygems.org'
 gem 'sinatra'
-gem 'cross_origin'
+gem 'sinatra-cross_origin'
