@@ -228,7 +228,7 @@ dispLine = function(node, ind, top, color, bold, showloading) {
   span.text(Array(node.level + 1).join("　") + ("・" + node.title));
   if (showloading) {
     span.append($(' <span>&nbsp;</span>'));
-    span.append($('<img src="images/loading.gif" style="height:12pt;">'));
+    span.append($('<img src="/images/loading.gif" style="height:12pt;">'));
   }
   $('#menu').append(span);
   if (useAnimation) {
