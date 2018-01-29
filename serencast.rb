@@ -6,7 +6,8 @@ $:.unshift File.expand_path 'lib', File.dirname(__FILE__)
 require 'rubygems'
 
 require 'sinatra'
-require 'sinatra/cross_origin'
+# require 'sinatra/cross_origin'
+require 'cross_origin'
 
 require 'gethistory'
 require 'getsbdata'
