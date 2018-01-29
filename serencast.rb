@@ -6,7 +6,7 @@ $:.unshift File.expand_path 'lib', File.dirname(__FILE__)
 require 'rubygems'
 
 require 'sinatra'
-require 'sinatra/cross_origin'
+require 'sinatra/cross_origin' # gem install sinatra-cross_origin
 
 require 'gethistory'
 require 'getsbdata'
@@ -34,10 +34,10 @@ get '/:project/:page/json' do |project,page|
   getsbdata(project,page).to_json
 end
 
-# get '/' do
-#   redirect 'https://masui.github.io/Serencast/'
-# end
-# 
+get '/' do
+  redirect 'index.html'
+end
+
 # get '/index.html' do
 #   redirect 'https://masui.github.io/Serencast/'
 # end
