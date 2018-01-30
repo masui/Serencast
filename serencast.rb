@@ -35,7 +35,7 @@ get '/:project/:page/json' do |project,page|
 end
 
 get '/' do
-  send_file 'index.html'
+  send_file File.join(settings.public_folder, 'index.html')
   # redirect 'index.html'
 end
 
