@@ -35,7 +35,8 @@ get '/:project/:page/json' do |project,page|
 end
 
 get '/' do
-  redirect 'index.html'
+  send_file 'index.html'
+  # redirect 'index.html'
 end
 
 # get '/index.html' do
