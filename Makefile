@@ -14,3 +14,6 @@ windows:
 	electron-packager ./app serencast --overwrite --platform=win32 --arch=x64 --electronVersion=0.36.1
 zip: windows
 	zip -r serencast.zip serencast-win32-x64
+
+run:
+	bundle exec /usr/local/opt/ruby/bin/ruby serencast.rb

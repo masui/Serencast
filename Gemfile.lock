@@ -6,6 +6,7 @@ GEM
       simple-rss (>= 1.1)
     hpricot (0.8.6)
     mustermann (1.0.1)
+    puma (3.11.2)
     rack (2.0.3)
     rack-protection (2.0.0)
       rack
@@ -24,6 +25,7 @@ PLATFORMS
 DEPENDENCIES
   feed-normalizer
   hpricot
+  puma
   sinatra
   sinatra-cross_origin
 
