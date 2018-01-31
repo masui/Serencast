@@ -4,4 +4,4 @@ gem 'sinatra-cross_origin'
 gem 'hpricot'
 gem 'feed-normalizer'
 
-# gem 'puma'
+gem 'puma'
