@@ -49,6 +49,8 @@ def _getsbdata(project,page=nil)
     # もっといろんな文字をコメントにできるようにした方がいいかも
     next if line =~ /^\s*$/
     next if line =~ /^\s*[#>%]/
+
+    line = line.force_encoding('utf-8')
     
     line.sub!(/^(\s*)/,'')
     indent = $&.length
@@ -100,11 +102,12 @@ def _getsbdata(project,page=nil)
         if url =~ /atom.*\.xml/ then
           parents[indent]['children'] << getatom(title,url)
         elsif url =~ /\.rdf$/ || 
-            url =~ /\/(rss|feed)/ ||
-            url =~ /(rss|feed)\// ||
-            url =~ /queryfeed.net/i ||
-            url =~ /twitrss.me\/twitter_user_to_rss/ || 
-            url =~ /\.rss$/ then
+              url =~ /\/(rss|feed)/ ||
+              url =~ /(rss|feed)\// ||
+              url =~ /queryfeed.net/i ||
+              url =~ /twitrss.me\/twitter_user_to_rss/ || 
+              url =~ /\.rss$/ then
+          puts "RSS FEED"
           parents[indent]['children'] << getrss(title,url)
         elsif url =~ /\.ltsv$/ then
           # Get the LTSV data and convert it to an object 
