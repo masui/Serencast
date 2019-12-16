@@ -5,19 +5,21 @@ GEM
       hpricot (>= 0.6)
       simple-rss (>= 1.1)
     hpricot (0.8.6)
-    mustermann (1.0.1)
-    puma (3.11.2)
-    rack (2.0.3)
-    rack-protection (2.0.0)
+    mustermann (1.0.3)
+    nio4r (2.5.2)
+    puma (4.3.1)
+      nio4r (~> 2.0)
+    rack (2.0.7)
+    rack-protection (2.0.7)
       rack
-    simple-rss (1.3.1)
-    sinatra (2.0.0)
+    simple-rss (1.3.3)
+    sinatra (2.0.7)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.0)
+      rack-protection (= 2.0.7)
       tilt (~> 2.0)
     sinatra-cross_origin (0.4.0)
-    tilt (2.0.8)
+    tilt (2.0.10)
 
 PLATFORMS
   ruby
@@ -30,7 +32,7 @@ DEPENDENCIES
   sinatra-cross_origin
 
 RUBY VERSION
-   ruby 2.3.0p0
+   ruby 2.4.0p0
 
 BUNDLED WITH
-   1.16.1
+   2.1.0

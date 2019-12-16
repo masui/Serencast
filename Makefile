@@ -16,4 +16,5 @@ zip: windows
 	zip -r serencast.zip serencast-win32-x64
 
 run:
-	bundle exec /usr/local/opt/ruby/bin/ruby serencast.rb
+	bundle exec /home/tmasui/.rbenv/shims/ruby serencast.rb -p 3000
+#	bundle exec /usr/local/opt/ruby/bin/ruby serencast.rb
