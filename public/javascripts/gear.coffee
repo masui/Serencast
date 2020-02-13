@@ -223,7 +223,7 @@ display = (newNodeList) -> # calc()で計算したリストを表示
           $('#image').css 'display','none'
           $('#iframe').attr 'src',url
     else
-    	$.contentswin.location.href = url
+      $.contentswin.location.href = url
 
   # 新しいノードの表示位置計算
   node = nodeList[0]

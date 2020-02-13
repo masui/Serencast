@@ -84,7 +84,8 @@ def _getsbdata(project,page=nil)
       }
     else
       #parents[indent]['children'] << node
-      if line =~ /^(\s*)\[(.*http.*)\](.*)$/ then # normal link to a content data
+      # if line =~ /^(\s*)\[(.*http.*)\](.*)$/ then # normal link to a content data
+      if line =~ /^(\s*)\[\[(.*http.*)\]\](.*)$/ || line =~ /^(\s*)\[(.*http.*)\](.*)$/ then
         head = $1
         content = $2
         tail = $3
@@ -137,7 +138,7 @@ def _getsbdata(project,page=nil)
 end
   
 def getsbdata(project,page=nil)
-  _getsbdata(project,page)['children']
+   _getsbdata(project,page)['children']
 end
 
 if __FILE__ == $0 then
