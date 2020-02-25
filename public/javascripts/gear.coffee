@@ -390,6 +390,17 @@ keydownfunc = (e) ->
     when 38 then move(-1,0) # 上
     when 39 then move(1,1)  # 右
     when 40 then move(1,0)  # 下
+  if e.keyCode == 38
+    $('#up').css 'display','block'
+    $('#pressed').text "U pressed"
+  if e.keyCode == 40
+    $('#down').css 'display','block'
+    $('#pressed').text "D pressed"
+
+keyupfunc = (e) ->
+  $('#up').css 'display','none'
+  $('#down').css 'display','none'
+  $('#pressed').text ""
 
 $(window).on
   'mousedown':  downfunc
@@ -399,6 +410,7 @@ $(window).on
   'mousemove':  movefunc
   'touchmove':  movefunc
   'keydown':    keydownfunc
+  'keyup':      keyupfunc
   'resize':     resizefunc
 
 setup_paddle = ->
