@@ -534,11 +534,9 @@ keydownfunc = function(e) {
   }
   if (e.keyCode === 38) {
     $('#up').css('display', 'block');
-    $('#pressed').text("U pressed");
   }
   if (e.keyCode === 40) {
-    $('#down').css('display', 'block');
-    return $('#pressed').text("D pressed");
+    return $('#down').css('display', 'block');
   }
 };
 
