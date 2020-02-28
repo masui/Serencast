@@ -57,7 +57,7 @@ spans = {};
 
 oldSpans = {};
 
-StepTime = 400;
+StepTime = 700;
 
 ExpandTime = 900;
 

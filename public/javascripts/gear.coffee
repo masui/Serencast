@@ -30,7 +30,8 @@ spans = {}        # 表示されるspan要素のリスト
 oldSpans = {}
 
 #StepTime = 1000         # 段階的展開のタイムアウト時間   ?????
-StepTime = 400         # 段階的展開のタイムアウト時間   ?????
+#StepTime = 400         # 段階的展開のタイムアウト時間   ?????
+StepTime = 700         # 段階的展開のタイムアウト時間   ?????
 #ExpandTime = 1500       # 無操作時展開のタイムアウト時間
 ExpandTime = 900       # 無操作時展開のタイムアウト時間
 expandTimeout = null
