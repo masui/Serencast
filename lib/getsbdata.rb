@@ -68,7 +68,6 @@ def _getsbdata(project,page=nil)
         end
       end
     }
-
     parents[indent]['children'] = [] if parents[indent]['children'].nil?
     
     if line =~ /^\[\/([^\/]*)\/?\]/ # 別のScrapboxデータ
@@ -80,6 +79,11 @@ def _getsbdata(project,page=nil)
       c = _getsbdata($1,$2)
       c['children'].each { |child|
         # parents[indent]['children'] << c['children'][0]
+        parents[indent]['children'] << child
+      }
+    elsif line =~ /^\[([^\/]+)\]$/ # 別のScrapboxページ
+      c = _getsbdata(project,$1)
+      c['children'].each { |child|
         parents[indent]['children'] << child
       }
     else
@@ -145,5 +149,6 @@ if __FILE__ == $0 then
   # puts getsbdata('karin-bookmarks','__bookmarks').to_json
   # puts getsbdata('nikezonoCast','Masterpiece').to_json
   # puts getsbdata('masui-bookmarks').to_json
-  puts getsbdata('MasuiCast','Bookmarks').to_json
+  # puts getsbdata('MasuiCast','Bookmarks').to_json
+  puts getsbdata('Serencast','Top').to_json
 end
