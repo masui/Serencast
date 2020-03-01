@@ -23,9 +23,17 @@ get '/:project/' do |project|
   redirect "/#{project}"
 end
 
+get '/test/:project/:page' do |project,page|
+  @project = project
+  @page = page
+  @test = true
+  erb :serencast
+end
+
 get '/:project/:page' do |project,page|
   @project = project
   @page = page
+  @test = false
   erb :serencast
 end
 

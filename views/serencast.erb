@@ -19,8 +19,13 @@
       height = screen.availHeight;
       width = screen.availWidth / 5;
       if(width > 300) width = 300;
+
+      if(<%= @test %>){
+         width = screen.availWidth;
+      }
+      
       param = `top=0,left=1,height=${height},width=${width}`;
-      window.open(`http://${location.host}/menu.html?project=${project}&page=${page}`,"menu",param);
+      window.open(`http://${location.host}/menu.html?project=${project}&page=${page}&test=<%= @test %>`,"menu",param);
     </script>
   </head>
   <body>

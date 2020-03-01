@@ -11,6 +11,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "anime": "electron . MasuiCast Anime",
+    "music": "electron . Serencast Music",
+    "top": "electron . Serencast Top",
+    "monorail": "electron . Serencast Monorail",
     "gyaon": "electron . masui gyaon",
     "full": "electron . masui Watch",
     "dmg": "electron-builder"

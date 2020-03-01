@@ -5,6 +5,10 @@
 # 
 # http://GitHub.com/masui/Gear
 #
+#
+
+useIframe = if test == 'true' then true else false
+contentsframe = null
 
 useAnimation =       true        unless useAnimation?        # アニメーションを使うかどうか
 showContents =       true        unless showContents?        # メニューだけだでなく内容も表示するか
@@ -84,7 +88,18 @@ $ -> # document.ready()
   loadData()
 
   if showContents
-    if singleWindow
+    if useIframe
+      # contentsframe = $('<iframe>')
+      contentsframe = $('<img>')
+      contentsframe.css 'position','absolute'
+      contentsframe.css 'top','200px'
+      contentsframe.css 'left','400px'
+      contentsframe.css 'width','960px'
+      contentsframe.css 'height','540px'
+      contentsframe.attr 'frameborder','0'
+      # contentsframe.attr 'src', 'http://pitecan.com'
+      $('body').append contentsframe
+    else if singleWindow
     else # コンテンツ表示ウィンドウを開く
       height = screen.availHeight
       menuwidth = Math.min screen.availWidth / 5, 300
@@ -213,7 +228,9 @@ display = (newNodeList) -> # calc()で計算したリストを表示
   # iframeまたは別ウィンドウにコンテンツを表示
   url = nodeList[0].url
   if url && showContents
-    if singleWindow
+    if useIframe
+      contentsframe.attr 'src', url
+    else if singleWindow
       if showContents && !nasty(url)
         if url.match /(gif|jpg|jpeg|png)$/i
           $('#iframe').css 'display','none'
