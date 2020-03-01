@@ -8,7 +8,7 @@
 #
 
 useIframe = if test == 'true' then true else false
-contentsframe = null
+# contentsframe = null
 
 useAnimation =       true        unless useAnimation?        # アニメーションを使うかどうか
 showContents =       true        unless showContents?        # メニューだけだでなく内容も表示するか
@@ -89,16 +89,24 @@ $ -> # document.ready()
 
   if showContents
     if useIframe
-      # contentsframe = $('<iframe>')
-      contentsframe = $('<img>')
-      contentsframe.css 'position','absolute'
-      contentsframe.css 'top','200px'
-      contentsframe.css 'left','200px'
-      contentsframe.css 'width','960px'
-      contentsframe.css 'height','540px'
-      contentsframe.attr 'frameborder','0'
-      # contentsframe.attr 'src', 'http://pitecan.com'
-      $('body').append contentsframe
+      image = $('<img>')
+      image.attr 'id', 'image'
+      $('body').append image
+      $('#image').css 'position','absolute'
+      $('#image').css 'top','0px'
+      $('#image').css 'left','300px'
+      #$('#image').css 'width','960px'
+      $('#image').css 'height', screen.availHeight
+
+      iframe = $('<iframe>')
+      iframe.attr 'id', 'iframe'
+      $('body').append iframe
+      $('#iframe').css 'position','absolute'
+      $('#iframe').css 'top','0px'
+      $('#iframe').css 'left','300px'
+      #$('#iframe').css 'width','960px'
+      $('#iframe').css 'height',screen.availHeight
+      $('#iframe').attr 'frameborder','0'
     else if singleWindow
     else # コンテンツ表示ウィンドウを開く
       height = screen.availHeight
@@ -229,7 +237,15 @@ display = (newNodeList) -> # calc()で計算したリストを表示
   url = nodeList[0].url
   if url && showContents
     if useIframe
-      contentsframe.attr 'src', url
+      #$('#image').attr 'src', url
+      if url.match /(gif|jpg|jpeg|png)$/i
+        $('#iframe').css 'display','none'
+        $('#image').css 'display','block'
+        $('#image').attr 'src',url
+      else
+        $('#iframe').css 'display','block'
+        $('#image').css 'display','none'
+        $('#iframe').attr 'src',url
     else if singleWindow
       if showContents && !nasty(url)
         if url.match /(gif|jpg|jpeg|png)$/i
