@@ -93,7 +93,7 @@ $ -> # document.ready()
       contentsframe = $('<img>')
       contentsframe.css 'position','absolute'
       contentsframe.css 'top','200px'
-      contentsframe.css 'left','300px'
+      contentsframe.css 'left','200px'
       contentsframe.css 'width','960px'
       contentsframe.css 'height','540px'
       contentsframe.attr 'frameborder','0'
