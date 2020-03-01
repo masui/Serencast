@@ -133,7 +133,7 @@ $(function() {
       contentsframe = $('<img>');
       contentsframe.css('position', 'absolute');
       contentsframe.css('top', '200px');
-      contentsframe.css('left', '400px');
+      contentsframe.css('left', '300px');
       contentsframe.css('width', '960px');
       contentsframe.css('height', '540px');
       contentsframe.attr('frameborder', '0');
@@ -536,22 +536,13 @@ movefunc = function(e) {
 keydownfunc = function(e) {
   switch (e.keyCode) {
     case 37:
-      move(-1, 1);
-      break;
+      return move(-1, 1);
     case 38:
-      move(-1, 0);
-      break;
+      return move(-1, 0);
     case 39:
-      move(1, 1);
-      break;
+      return move(1, 1);
     case 40:
-      move(1, 0);
-  }
-  if (e.keyCode === 38) {
-    $('#up').css('display', 'block');
-  }
-  if (e.keyCode === 40) {
-    return $('#down').css('display', 'block');
+      return move(1, 0);
   }
 };
 

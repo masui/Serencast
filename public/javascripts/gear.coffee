@@ -93,7 +93,7 @@ $ -> # document.ready()
       contentsframe = $('<img>')
       contentsframe.css 'position','absolute'
       contentsframe.css 'top','200px'
-      contentsframe.css 'left','400px'
+      contentsframe.css 'left','300px'
       contentsframe.css 'width','960px'
       contentsframe.css 'height','540px'
       contentsframe.attr 'frameborder','0'
@@ -408,12 +408,10 @@ keydownfunc = (e) ->
     when 38 then move(-1,0) # 上
     when 39 then move(1,1)  # 右
     when 40 then move(1,0)  # 下
-  if e.keyCode == 38
-    $('#up').css 'display','block'
-    # $('#pressed').text "U pressed"
-  if e.keyCode == 40
-    $('#down').css 'display','block'
-    # $('#pressed').text "D pressed"
+  #if e.keyCode == 38
+  #  $('#up').css 'display','block'
+  #if e.keyCode == 40
+  #  $('#down').css 'display','block'
 
 keyupfunc = (e) ->
   $('#up').css 'display','none'
