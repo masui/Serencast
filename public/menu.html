@@ -6,6 +6,9 @@
       var query = document.location.search.substring(1);
       var parameters = query.split('&');
       var result = {};
+      var singlewin = false;
+      var showbutton = false;
+      var count = false;
       for(var i=0; i < parameters.length; i++) {
          var element = parameters[i].split('=');
          var paramName = decodeURIComponent(element[0]);
@@ -15,7 +18,9 @@
       var project = result.project;
       var page = result.page;
       var json = `/${project}/${page}/json`;
-      var test = result.test;		       
+      if(result.test) singlewin = true;
+      if(result.showbutton) showbutton = true;
+      if(result.count) count = true;
     </script>
     <script src="/javascripts/jquery.js"></script>
     <script src="/javascripts/jquery.mousewheel.js"></script>
@@ -24,14 +29,9 @@
   </head>
   <body>
     <div id='menu'></div>
-    <div id="pressed" style="position:absolute; top:10; left:60; font-size:30; color:#000;">
-    </div>
-    <div id="up" style="position:absolute; top:30; left:80; font-size:100; color:#ff0; display:none;">
-      ▲
-    </div>
-    <div id="down" style="position:absolute; top:120; left:80; font-size:100; color:#ff0; display:none;">
-      ▼
-    </div>
+    <div id="time" style="position:absolute; top:30; left:80; font-size:30; color:#000; display:none;">0:00</div>
+    <div id="up" style="position:absolute; top:30; left:80; font-size:100; color:#ff0; display:none;">▲</div>
+    <div id="down" style="position:absolute; top:120; left:80; font-size:100; color:#ff0; display:none;">▼</div>
   </body>
 </html>
 

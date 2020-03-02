@@ -7,9 +7,6 @@
 #
 #
 
-useIframe = if test == 'true' then true else false
-# contentsframe = null
-
 useAnimation =       true        unless useAnimation?        # アニメーションを使うかどうか
 showContents =       true        unless showContents?        # メニューだけだでなく内容も表示するか
 autoexpand =         true        unless autoexpand?          # 自動展開(デフォルト動作)
@@ -22,11 +19,11 @@ json =               'data.json' unless json?
 useAudio =           false       unless useAudio?            # 項目を発声するかどうか
 sayCGI =  "http://localhost/~masui/say.cgi" unless sayCGI?
 
-node_app = (typeof(require) != 'undefined') # node-webkitによるアプリかどうか
-use_linda = (typeof(io) != 'undefined')     # Lindaを使うかどうか
+nodeApp = (typeof(require) != 'undefined') # node-webkitによるアプリかどうか
+useLinda = (typeof(io) != 'undefined')     # Lindaを使うかどうか
 ts = null
 linda = null
-singleWindow = true if node_app
+singleWindow = true if nodeApp
 
 nodeList = {}     # 表示可能ノードのリスト. nodeList[0]を中心に表示する
 oldNodeList = {}
@@ -49,6 +46,18 @@ hideTimeout = null
 typeCount = 0           # 連打したかどうか: 連打されてたら表示を行なう
 typeCountTimeout = null
 
+# 時間計測 (評価実験のため)
+# targetTime = 0 # 1 - 867
+count = 0
+startTime = new Date
+
+randTime = ->
+  t = Math.floor Math.random()*867
+  min = ("0" + Math.floor t/60).slice(-2)
+  sec = ("0" + t % 60).slice(-2)
+  "#{min}:#{sec}"
+
+
 loadData = ->
   $.getJSON json, (data) ->
     initData data, null, 0
@@ -66,7 +75,7 @@ initData = (nodes,parent,level) -> # 木構造をセットアップ
     initData(node.children,node,level+1) if node.children
 
 $ -> # document.ready()
-  if node_app
+  if nodeApp
     # v0.10からMacではこれが必要らしい
     nw = require 'nw.gui'
     win = nw.Window.get()
@@ -82,13 +91,15 @@ $ -> # document.ready()
       ,false
 
   # 可能ならpaddle対応
-  if use_linda
-    setup_paddle()
+  if useLinda
+    setupPaddle()
 
   loadData()
 
+  $('#time').text randTime()
+
   if showContents
-    if useIframe
+    if singlewin
       image = $('<img>')
       image.attr 'id', 'image'
       $('body').append image
@@ -236,8 +247,7 @@ display = (newNodeList) -> # calc()で計算したリストを表示
   # iframeまたは別ウィンドウにコンテンツを表示
   url = nodeList[0].url
   if url && showContents
-    if useIframe
-      #$('#image').attr 'src', url
+    if singlewin
       if url.match /(gif|jpg|jpeg|png)$/i
         $('#iframe').css 'display','none'
         $('#image').css 'display','block'
@@ -330,6 +340,24 @@ display = (newNodeList) -> # calc()で計算したリストを表示
                   typeCount = 2
                   refresh()
 
+  if count < 5
+    $('#time').css 'display','block'
+    if $('#time').text() == newNodeList[0].title # マッチ
+      count += 1
+      if count == 5 # 終了
+        endTime = new Date
+        elapsed = endTime - startTime
+        alert elapsed / 1000.0 / count
+      else
+        c = $('body').css 'background-color'
+        $('body').css 'background-color', '#ff0'
+        setTimeout ->
+          $('body').css 'background-color', c
+        , 300
+        $('#time').text randTime()
+  else
+    $('#time').css 'display','none'
+
 move = (delta, shrinkMode) -> # 視点移動
   if typeCount <= 2
     clearTimeout typeCountTimeout
@@ -419,17 +447,20 @@ movefunc = (e) ->
     $.step = newstep
 
 keydownfunc = (e) ->
+  e.preventDefault()
   switch e.keyCode
     when 37 then move(-1,1) # 左
     when 38 then move(-1,0) # 上
     when 39 then move(1,1)  # 右
     when 40 then move(1,0)  # 下
-  #if e.keyCode == 38
-  #  $('#up').css 'display','block'
-  #if e.keyCode == 40
-  #  $('#down').css 'display','block'
+  if showbutton
+    if e.keyCode == 38
+      $('#up').css 'display','block'
+    if e.keyCode == 40
+      $('#down').css 'display','block'
 
 keyupfunc = (e) ->
+  e.preventDefault()
   $('#up').css 'display','none'
   $('#down').css 'display','none'
   $('#pressed').text ""
@@ -445,7 +476,7 @@ $(window).on
   'keyup':      keyupfunc
   'resize':     resizefunc
 
-setup_paddle = ->
+setupPaddle = ->
   socket = io.connect "http://localhost:3000"
   linda = new Linda().connect(socket)
   ts = linda.tuplespace 'paddle'
