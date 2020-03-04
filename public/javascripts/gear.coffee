@@ -48,7 +48,7 @@ typeCountTimeout = null
 
 # 時間計測 (評価実験のため)
 # targetTime = 0 # 1 - 867
-count = 0
+count = 0 unless count?
 startTime = new Date
 
 randTime = ->
@@ -96,7 +96,8 @@ $ -> # document.ready()
 
   loadData()
 
-  $('#time').text randTime()
+  if count < 5 
+    $('#time').text randTime()
 
   if showContents
     if singlewin
@@ -345,7 +346,7 @@ display = (newNodeList) -> # calc()で計算したリストを表示
     if $('#time').text() == newNodeList[0].title # マッチ
       count += 1
       if count == 5 # 終了
-        endTime = new Date
+        endTime = new Datep
         elapsed = endTime - startTime
         alert elapsed / 1000.0 / count
       else

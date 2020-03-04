@@ -75,7 +75,9 @@ typeCount = 0;
 
 typeCountTimeout = null;
 
-count = 0;
+if (typeof count === "undefined" || count === null) {
+  count = 0;
+}
 
 startTime = new Date;
 
@@ -136,7 +138,9 @@ $(function() {
     setupPaddle();
   }
   loadData();
-  $('#time').text(randTime());
+  if (count < 5) {
+    $('#time').text(randTime());
+  }
   if (showContents) {
     if (singlewin) {
       image = $('<img>');
@@ -453,7 +457,7 @@ display = function(newNodeList) {
     if ($('#time').text() === newNodeList[0].title) {
       count += 1;
       if (count === 5) {
-        endTime = new Date;
+        endTime = new Datep;
         elapsed = endTime - startTime;
         return alert(elapsed / 1000.0 / count);
       } else {

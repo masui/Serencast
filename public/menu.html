@@ -20,7 +20,7 @@
       var json = `/${project}/${page}/json`;
       if(result.test) singlewin = true;
       if(result.showbutton) showbutton = true;
-      if(result.count) count = true;
+      if(result.count) count = Number(result.count);
     </script>
     <script src="/javascripts/jquery.js"></script>
     <script src="/javascripts/jquery.mousewheel.js"></script>
