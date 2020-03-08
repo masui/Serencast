@@ -6,6 +6,7 @@
 # http://GitHub.com/masui/Gear
 #
 #
+#
 
 useAnimation =       true        unless useAnimation?        # アニメーションを使うかどうか
 showContents =       true        unless showContents?        # メニューだけだでなく内容も表示するか
@@ -24,6 +25,11 @@ useLinda = (typeof(io) != 'undefined')     # Lindaを使うかどうか
 ts = null
 linda = null
 singleWindow = true if nodeApp
+
+singlewin = false ##################3
+singleWindow = false
+showbutton = true
+count = 100
 
 nodeList = {}     # 表示可能ノードのリスト. nodeList[0]を中心に表示する
 oldNodeList = {}
