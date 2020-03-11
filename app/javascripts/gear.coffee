@@ -14,6 +14,9 @@ dontShowSingleNode = true        unless dontShowSingleNode?  # 辞書に使う�
 singleWindow =       false       unless singleWindow?        # メニューとコンテンツを同じ画面にするかどうか
 json =               'data.json' unless json?
 
+console.log "====================="
+
+
 # sayコマンドで読みあげる
 useAudio =           false       unless useAudio?            # 項目を発声するかどうか
 sayCGI =  "http://localhost/~masui/say.cgi" unless sayCGI?

@@ -1,3 +1,6 @@
+top: compile
+	npm run top
+
 compile:
 	coffee -c -b javascripts/gear.coffee
 
@@ -14,12 +17,12 @@ anime: compile
 gyaon: compile
 	npm run gyaon
 
-DMG=docs/Serencast-1.0.0.dmg
-APP=docs/mac/Serencast.app/
+DMG=bin/Serencast-1.0.0.dmg
+APP=bin/mac/Serencast.app/
 
-# docsの下にdmgやappを生成
-dmg: compile install
-	npm run dmg
+# binの下にdmgやappを生成
+build: compile install
+	npm run build
 
 dmg-upload:
 	scp ${DMG} Serencast.com:/home/masui/Serencast/public/Serencast.dmg
@@ -28,4 +31,4 @@ run-mac:
 	open ${APP}
 
 clean:
-	/bin/rm -r -f node_modules docs *~
+	/bin/rm -r -f node_modules docs bin *~

@@ -1,41 +1,42 @@
 {
-  "name": "Serencast",
-  "version": "1.0.0",
-  "description": "SerencastのElectronアプリ",
-  "main": "main.js",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:masui/Serencast.git"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron .",
-    "anime": "electron . MasuiCast Anime",
-    "music": "electron . Serencast Music",
-    "top": "electron . Serencast Top",
-    "monorail": "electron . Serencast Monorail",
-    "gyaon": "electron . masui gyaon",
-    "full": "electron . masui Watch",
-    "dmg": "electron-builder"
-  },
-  "keywords": [],
-  "author": "Toshiyuki Masui",
-  "license": "MIT",
-  "dependencies": {
-    "dotenv": "^4.0.0",
-    "electron-referer": "^0.3.0"
-  },
-  "devDependencies": {
-    "electron": "^1.7.9",
-    "electron-builder": "^19.45.5"
-  },
-  "build": {
-    "appId": "com.pitecan.serencast",
-    "mac": {
-      "target": "dmg"
-    },
-    "directories": {
-      "output": "docs"
-    }
-  }
+			"name": "Serencast",
+			"version": "1.0.0",
+			"description": "SerencastのElectronアプリ",
+			"main": "main.js",
+			"repository": {
+						"type": "git",
+						"url": "git@github.com:masui/Serencast.git"
+			},
+			"scripts": {
+						"test": "echo \"Error: no test specified\" && exit 1",
+						"start": "electron .",
+						"anime": "electron . MasuiCast Anime",
+						"music": "electron . Serencast Music",
+						"top": "electron . Serencast Top",
+						"monorail": "electron . Serencast Monorail",
+						"gyaon": "electron . masui gyaon",
+						"full": "electron . masui Watch",
+						"xxx": "electron . 6de9439834c91475 XXX",
+						"build": "electron-builder"
+			},
+			"keywords": [],
+			"author": "Toshiyuki Masui",
+			"license": "MIT",
+			"dependencies": {
+						"dotenv": "^4.0.0",
+						"electron-referer": "^0.3.0"
+			},
+			"devDependencies": {
+						"electron": "^1.7.9",
+						"electron-builder": "^19.45.5"
+			},
+			"build": {
+						"appId": "com.pitecan.serencast",
+						"mac": {
+									"target": "dmg"
+						},
+						"directories": {
+									"output": "bin"
+						}
+			}
 }

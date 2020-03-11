@@ -24,7 +24,7 @@ if(! project) project = process.env.SERENCAST_PROJECT;
 if(! project) project = "Serencast";
 var page = process.argv[3];
 if(! page) page = process.env.SERENCAST_PAGE;
-if(! page) page = "Demo";
+if(! page) page = "Top";
 
 // 全てのウィンドウが閉じたら終了
 app.on('window-all-closed', function() {
