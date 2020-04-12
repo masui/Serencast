@@ -33,7 +33,7 @@
 			"build": {
 						"appId": "com.pitecan.serencast",
 						"mac": {
-									"target": "dmg"
+									"target": "pkg"
 						},
 						"directories": {
 									"output": "bin"

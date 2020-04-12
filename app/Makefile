@@ -24,6 +24,9 @@ APP=bin/mac/Serencast.app/
 build: compile install
 	npm run build
 
+build-mac: build
+	hdiutil create ${DMG} -volname "Serencast" -srcfolder ${APP}
+
 dmg-upload:
 	scp ${DMG} Serencast.com:/home/masui/Serencast/public/Serencast.dmg
 
