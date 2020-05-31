@@ -34,7 +34,8 @@
 			"build": {
 						"appId": "com.pitecan.serencast",
 						"mac": {
-									"target": "pkg"
+									"target": "pkg",
+									"icon": "serencast.icns"
 						},
 						"directories": {
 									"output": "bin"

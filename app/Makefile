@@ -27,6 +27,9 @@ build: compile install
 build-mac: build
 	hdiutil create ${DMG} -volname "Serencast" -srcfolder ${APP}
 
+install-mac:
+	cp -r ${APP} /Applications
+
 dmg-upload:
 	scp ${DMG} Serencast.com:/home/masui/Serencast/public/Serencast.dmg
 
