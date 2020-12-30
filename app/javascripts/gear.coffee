@@ -233,7 +233,12 @@ display = (newNodeList) -> # calc()で計算したリストを表示
   center = browserHeight() / 2
 
   # iframeまたは別ウィンドウにコンテンツを表示
+
+  console.log nodeList[0]
   url = nodeList[0].url
+  url = nodeList[0]['url']
+  console.log url
+  showContents = true
   if url && showContents
     if singleWindow
       if showContents && !nasty(url)

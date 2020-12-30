@@ -63,6 +63,9 @@ app.on('ready', function() {
 	height: size.height,
 	fullscreen: true
     });
+
+    // mainWindow.openDevTools(); // Debug
+    
     mainWindow.loadURL('file://' + __dirname + `/index.html?project=${project}&page=${page}`);
 
     // ウィンドウが閉じられたらアプリも終了
